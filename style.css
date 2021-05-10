@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 20px;
+}
+
+table {
+  padding: 10px;
+  border: 2px solid rgb(21, 112, 112);
+  margin-top: 10px;
+}
+
+td {
+  border: 2px solid rgb(21, 112, 112);
+  padding: 10px;
+  width: 200px;
+}

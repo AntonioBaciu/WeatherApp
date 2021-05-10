@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <label>City Name:</label>
+    <input type="text" id="input" />
+    <button id="run">Search</button>
+
+    <table>
+      <th>Forecast</th>
+      <tr>
+        <td>Current temperature: <span id="current_temp"></span></td>
+      </tr>
+      <tr>
+        <td>Day 1: <span id="day_1"></span></td>
+      </tr>
+      <tr>
+        <td>Day 2: <span id="day_2"></span></td>
+      </tr>
+      <tr>
+        <td>Day 3: <span id="day_3"></span></td>
+      </tr>
+      <tr>
+        <td>Day 4: <span id="day_4"></span></td>
+      </tr>
+      <tr>
+        <td>Day 5: <span id="day_5"></span></td>
+      </tr>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
