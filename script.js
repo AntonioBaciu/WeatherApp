@@ -4,18 +4,30 @@ function roundTemp(temp) {
   return temp;
 }
 
+// Funtion that creates an array of the next specified number of days
+// Created using moment js
+function nextDays(daysRequired) {
+  let days = [];
+  for (let i = 1; i <= daysRequired; i++) {
+    days.push(moment().add(i, "days").format("dddd"));
+  }
+  return days;
+}
+
 // Event listener function [click & enter]
 function init() {
   const cityName = document.getElementById("input"); // Input field
   const runBTN = document.getElementById("run"); // Button
   cityName.addEventListener("keyup", (event) => {
     if (event.keyCode === 13) {
+      getDays();
       getTemperature();
       getForecast();
       getIMG();
     }
   });
   runBTN.addEventListener("click", () => {
+    getDays();
     getTemperature();
     getForecast();
     getIMG();
@@ -38,11 +50,20 @@ function chunkArray(myArray, chunk_size) {
   return results;
 }
 
+// Display next days
+
+function getDays() {
+  let testArray = nextDays(5);
+  for (let i = 0; i < 5; i++) {
+    document.getElementById(`day_${i}`).textContent = testArray[i];
+  }
+}
+
 // Gets the current temperature in °C and round the value
 const getTemperature = async () => {
   let { data } = await axios
     .get(
-      `http://api.openweathermap.org/data/2.5/weather?q=${
+      `https://api.openweathermap.org/data/2.5/weather?q=${
         document.getElementById("input").value
       }&appid=ba01b37bddc3f18f7f259c51e1c01e01&units=metric`
     )
@@ -52,12 +73,13 @@ const getTemperature = async () => {
   const current_temp = document.getElementById("current_temp"); // Current temperature
   const temperature = roundTemp(data.main.temp);
   current_temp.textContent = `${temperature} °C`;
+  document.getElementById("text_temp").textContent = "Current temperature";
 };
 
 // 5 days forecast
 const getForecast = async () => {
   let { data } = await axios.get(
-    `http://api.openweathermap.org/data/2.5/forecast?q=${
+    `https://api.openweathermap.org/data/2.5/forecast?q=${
       document.getElementById("input").value
     }&appid=ba01b37bddc3f18f7f259c51e1c01e01&units=metric`
   );
@@ -88,15 +110,12 @@ const getForecast = async () => {
 // Access Unsplash API
 
 const getIMG = async () => {
-  const inputKeyword = document.getElementById("input");
+  const inputKeyword = document.getElementById("input").value;
   const api_url = `https://api.unsplash.com/search/photos?query=${inputKeyword}%20building&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII`;
   let { data } = await axios.get(api_url);
-  document.getElementById("image").src = api_url;
+  const sourceIMG = data.results[0].urls.regular;
+  document.getElementById("image").src = sourceIMG;
 };
 
 // When everything is loaded, call init
 init();
-
-// Unsplash API URL:
-//https://api.unsplash.com/search/photos?query=london&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII
-//https://api.unsplash.com/search/photos?query=knokke%20building&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII
