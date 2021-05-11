@@ -1,7 +1,7 @@
 // Round value -> ex: 15.70 -> 16
-function roundTemp(temp) {
-  temp = Math.round(temp);
-  return temp;
+function roundNum(number) {
+  number = Math.round(number);
+  return number;
 }
 
 // Funtion that creates an array of the next specified number of days
@@ -24,6 +24,7 @@ function init() {
       getTemperature();
       getForecast();
       getIMG();
+      getName();
     }
   });
   runBTN.addEventListener("click", () => {
@@ -31,6 +32,7 @@ function init() {
     getTemperature();
     getForecast();
     getIMG();
+    getName();
   });
 }
 
@@ -51,12 +53,22 @@ function chunkArray(myArray, chunk_size) {
 }
 
 // Display next days
-
 function getDays() {
   let testArray = nextDays(5);
   for (let i = 0; i < 5; i++) {
     document.getElementById(`day_${i}`).textContent = testArray[i];
   }
+}
+
+// Capitalize first letter of a string
+function letterCap(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Displays the input value in specified location
+function getName() {
+  const input = document.getElementById("input").value;
+  document.getElementById("name").textContent = letterCap(input);
 }
 
 // Gets the current temperature in °C and round the value
@@ -71,9 +83,8 @@ const getTemperature = async () => {
       alert("Invalid City Name");
     });
   const current_temp = document.getElementById("current_temp"); // Current temperature
-  const temperature = roundTemp(data.main.temp);
+  const temperature = roundNum(data.main.temp);
   current_temp.textContent = `${temperature} °C`;
-  document.getElementById("text_temp").textContent = "Current temperature";
 };
 
 // 5 days forecast
@@ -86,7 +97,7 @@ const getForecast = async () => {
   // Store 5 days temperatures in one array
   const tempsArray = [];
   for (let i = 0; i < 40; i++) {
-    let daily_temps = roundTemp(data.list[i].main.temp); // Round temperatures
+    let daily_temps = roundNum(data.list[i].main.temp); // Round temperatures
     tempsArray.push(daily_temps);
   }
 
@@ -96,14 +107,14 @@ const getForecast = async () => {
 
   // Calculate the avg temperature for each day
   for (let i = 0; i < dayTemps.length; i++) {
-    let dayTemperature = roundTemp(average(dayTemps[i]));
+    let dayTemperature = roundNum(average(dayTemps[i]));
     tempsArray_split.push(dayTemperature);
   }
   // Assigns every average temperature to the coresponding location in the table
   for (let i = 0; i < tempsArray_split.length; i++) {
     document.getElementById(
       `index_${i}`
-    ).textContent = `${tempsArray_split[i]} °C`;
+    ).textContent = ` ${tempsArray_split[i]} °C`;
   }
 };
 
@@ -111,9 +122,9 @@ const getForecast = async () => {
 
 const getIMG = async () => {
   const inputKeyword = document.getElementById("input").value;
-  const api_url = `https://api.unsplash.com/search/photos?query=${inputKeyword}%20building&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII`;
+  const api_url = `https://api.unsplash.com/search/photos?query=${inputKeyword}%20building&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII&orientation=landscape`;
   let { data } = await axios.get(api_url);
-  const sourceIMG = data.results[0].urls.regular;
+  const sourceIMG = data.results[0].urls.small;
   document.getElementById("image").src = sourceIMG;
 };
 

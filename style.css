@@ -1,36 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+#container {
+  justify-content: space-evenly;
 }
 
-body {
+.space {
   margin: 20px;
 }
 
-table {
-  padding: 10px;
-  border: 2px solid rgb(21, 112, 112);
-  margin-top: 10px;
-}
-
-td {
-  border: 2px solid rgb(21, 112, 112);
-  padding: 10px;
-  width: 200px;
-}
-
-.content-wrap {
-  display: flex;
-}
-
-.img-wrap {
-  margin: 10px;
-  height: 313px;
-  width: 400px;
-}
-
-img {
-  height: inherit;
-  width: inherit;
+.list-group-item {
+  justify-content: space-between;
 }
