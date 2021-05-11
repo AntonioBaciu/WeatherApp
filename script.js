@@ -20,7 +20,23 @@ function init() {
   });
 }
 
-// Gets the current temperature in C and round the value
+// Average of array
+function average(array) {
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) sum += array[i];
+  return parseFloat(sum / array.length);
+}
+
+// Split array
+function chunkArray(myArray, chunk_size) {
+  var results = [];
+  while (myArray.length) {
+    results.push(myArray.splice(0, chunk_size));
+  }
+  return results;
+}
+
+// Gets the current temperature in °C and round the value
 const getTemperature = async () => {
   const current_temp = document.getElementById("current_temp"); // Current temperature
   let { data } = await axios
@@ -43,15 +59,30 @@ const getForecast = async () => {
       document.getElementById("input").value
     }&appid=ba01b37bddc3f18f7f259c51e1c01e01&units=metric`
   );
-  for (let i = 0; i < 8; i++) {
-    let daily_temps = data.list[i].main.temp;
-    console.log(daily_temps);
+  // Store 5 days temperatures in one array
+  const tempsArray = [];
+  for (let i = 0; i < 40; i++) {
+    let daily_temps = roundTemp(data.list[i].main.temp); // Round temperatures
+    tempsArray.push(daily_temps);
   }
-  console.log(data.list);
-  // Need to find a way to sort the data from data.list
+
+  // Split the array in 8 piece arrays
+  const dayTemps = chunkArray(tempsArray, 8);
+
+  const tempsArray_split = [];
+  // Calculate the avg temperature for each day
+  for (let i = 0; i < dayTemps.length; i++) {
+    let dayTemperature = roundTemp(average(dayTemps[i]));
+    tempsArray_split.push(dayTemperature);
+  }
+
+  // Assigns every average temperature to the coresponding location in the table
+  for (let i = 0; i < tempsArray_split.length; i++) {
+    document.getElementById(
+      `index_${i}`
+    ).textContent = `${tempsArray_split[i]} °C`;
+  }
 };
 
 // When everything is loaded, call init
 init();
-
-// 6, 14, 22, 30, 38
