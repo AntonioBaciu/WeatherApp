@@ -12,11 +12,13 @@ function init() {
     if (event.keyCode === 13) {
       getTemperature();
       getForecast();
+      getIMG();
     }
   });
   runBTN.addEventListener("click", () => {
     getTemperature();
     getForecast();
+    getIMG();
   });
 }
 
@@ -38,7 +40,6 @@ function chunkArray(myArray, chunk_size) {
 
 // Gets the current temperature in °C and round the value
 const getTemperature = async () => {
-  const current_temp = document.getElementById("current_temp"); // Current temperature
   let { data } = await axios
     .get(
       `http://api.openweathermap.org/data/2.5/weather?q=${
@@ -48,6 +49,7 @@ const getTemperature = async () => {
     .catch(() => {
       alert("Invalid City Name");
     });
+  const current_temp = document.getElementById("current_temp"); // Current temperature
   const temperature = roundTemp(data.main.temp);
   current_temp.textContent = `${temperature} °C`;
 };
@@ -68,14 +70,13 @@ const getForecast = async () => {
 
   // Split the array in 8 piece arrays
   const dayTemps = chunkArray(tempsArray, 8);
-
   const tempsArray_split = [];
+
   // Calculate the avg temperature for each day
   for (let i = 0; i < dayTemps.length; i++) {
     let dayTemperature = roundTemp(average(dayTemps[i]));
     tempsArray_split.push(dayTemperature);
   }
-
   // Assigns every average temperature to the coresponding location in the table
   for (let i = 0; i < tempsArray_split.length; i++) {
     document.getElementById(
@@ -84,5 +85,18 @@ const getForecast = async () => {
   }
 };
 
+// Access Unsplash API
+
+const getIMG = async () => {
+  const inputKeyword = document.getElementById("input");
+  const api_url = `https://api.unsplash.com/search/photos?query=${inputKeyword}%20building&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII`;
+  let { data } = await axios.get(api_url);
+  document.getElementById("image").src = api_url;
+};
+
 // When everything is loaded, call init
 init();
+
+// Unsplash API URL:
+//https://api.unsplash.com/search/photos?query=london&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII
+//https://api.unsplash.com/search/photos?query=knokke%20building&client_id=_OqqlHbIl1ubFU376wBbyp3g8vG0MoZrqVda1ESGLII

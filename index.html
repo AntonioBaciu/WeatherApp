@@ -12,27 +12,32 @@
     <input type="text" id="input" />
     <button id="run">Search</button>
 
-    <table>
-      <th>Forecast</th>
-      <tr>
-        <td>Current temperature: <span id="current_temp"></span></td>
-      </tr>
-      <tr>
-        <td>Day 1: <span id="index_0"></span></td>
-      </tr>
-      <tr>
-        <td>Day 2: <span id="index_1"></span></td>
-      </tr>
-      <tr>
-        <td>Day 3: <span id="index_2"></span></td>
-      </tr>
-      <tr>
-        <td>Day 4: <span id="index_3"></span></td>
-      </tr>
-      <tr>
-        <td>Day 5: <span id="index_4"></span></td>
-      </tr>
-    </table>
+    <section class="content-wrap">
+      <table>
+        <th>Forecast</th>
+        <tr>
+          <td>Current temperature: <span id="current_temp"></span></td>
+        </tr>
+        <tr>
+          <td>Day 1: </span> <span id="index_0"></span></td>
+        </tr>
+        <tr>
+          <td>Day 2: </span> <span id="index_1"></span></td>
+        </tr>
+        <tr>
+          <td>Day 3: <span id="index_2"></span></td>
+        </tr>
+        <tr>
+          <td>Day 4: <span id="index_3"></span></td>
+        </tr>
+        <tr>
+          <td>Day 5: </span> <span id="index_4"></span></td>
+        </tr>
+      </table>
+      <div class="img-wrap">
+        <img id="image" src="" alt="" />
+      </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
   </body>
