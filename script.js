@@ -25,6 +25,7 @@ function init() {
       getForecast();
       getIMG();
       getName();
+      displayElement("flex");
     }
   });
   runBTN.addEventListener("click", () => {
@@ -33,6 +34,7 @@ function init() {
     getForecast();
     getIMG();
     getName();
+    displayElement("flex");
   });
 }
 
@@ -65,10 +67,21 @@ function letterCap(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Displays the input value in specified location
+// Gets the input value, capitalize its first letter
+//and dysplays it in the specified location
 function getName() {
   const input = document.getElementById("input").value;
   document.getElementById("name").textContent = letterCap(input);
+}
+
+// All elements with class .hide are displayed as specified
+function displayElement(type) {
+  let el = document.querySelectorAll(".hide");
+
+  for (let i = 0; i < el.length; i++) {
+    const currentEl = el[i];
+    currentEl.style.display = type;
+  }
 }
 
 // Gets the current temperature in °C and round the value
@@ -80,11 +93,25 @@ const getTemperature = async () => {
       }&appid=ba01b37bddc3f18f7f259c51e1c01e01&units=metric`
     )
     .catch(() => {
-      alert("Invalid City Name");
+      displayElement("none");
     });
   const current_temp = document.getElementById("current_temp"); // Current temperature
   const temperature = roundNum(data.main.temp);
   current_temp.textContent = `${temperature} °C`;
+
+  // Gets the info values from the API
+  const infoVals = Object.values(data.main);
+
+  // Asigns each value to specified location
+  for (let i = 1; i < 6; i++) {
+    const info = document.getElementById(`info_${i}`);
+    info.textContent = `${infoVals[i]} °C`;
+    if (i == 5) {
+      info.textContent = `${infoVals[i]}%`;
+    } else if (i == 4) {
+      info.textContent = `${infoVals[i]} hPa`;
+    }
+  }
 };
 
 // 5 days forecast

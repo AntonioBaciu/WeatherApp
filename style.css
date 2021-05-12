@@ -2,10 +2,19 @@
   justify-content: space-evenly;
 }
 
+.hide {
+  display: none;
+}
+
 .space {
   margin: 20px;
 }
 
 .list-group-item {
+  display: flex;
   justify-content: space-between;
+}
+
+.text-danger {
+  padding-top: 20px;
 }

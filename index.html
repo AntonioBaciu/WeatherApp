@@ -40,13 +40,13 @@
 
     <!-- Image Container -->
     <div class="container d-flex justify-content-center">
-      <img id="image" src="" class="img-fluid" alt="City Image">
+      <img id="image" src="" class="img-fluid hide" alt="City Image">
     </div>
 
     <!-- Info Container -->
     <div id="container" class="container d-flex flex-wrap">
       <!-- Current Temperature -->
-      <div class="card space" style="width: 18rem">
+      <div class="card space hide" style="width: 18rem">
         <div class="card-body">
           <h2 class="card-title" id="name">City Name</h2>
           <h2 class="card-text"><span id="text_temp"></span> <span id="current_temp"></h2>
@@ -54,28 +54,29 @@
         <ul class="list-group list-group-flush">
           <div class="card" style="width: 18rem">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Feels Like <span id="info_0"></span></li>
-              <li class="list-group-item">Min <span id="info_1"></span></li>
-              <li class="list-group-item">Max <span id="info_2"></span></li>
-              <li class="list-group-item">Humidity <span id="info_3"></span></li>
+              <li class="list-group-item">Feels Like <span id="info_1"></span></li>
+              <li class="list-group-item">Min <span id="info_2"></span></li>
+              <li class="list-group-item">Max <span id="info_3"></span></li>
+              <li class="list-group-item">Pressure <span id="info_4"></span></li>
+              <li class="list-group-item">Humidity <span id="info_5"></span></li>
             </ul>
           </div>
         </ul>
       </div>
 
       <!-- Forecast -->
-      <div class="card space" style="width: 18rem">
-        <div class="card-body">
+      <div class="card space hide" style="width: 18rem">
+        <div class="card-body d-flex align-items-center justify-content-center">
           <h2 class="card-title text-center">Forecast</h2>
         </div>
         <ul class="list-group list-group-flush">
           <div class="card" style="width: 18rem">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex"><span id="day_0"></span><span id="index_0"></span></li>
-              <li class="list-group-item d-flex"><span id="day_1"></span><span id="index_1"></span></li>
-              <li class="list-group-item d-flex"><span id="day_2"></span><span id="index_2"></span></li>
-              <li class="list-group-item d-flex"><span id="day_3"></span><span id="index_3"></span></li>
-              <li class="list-group-item d-flex"><span id="day_4"></span><span id="index_4"></span></li>
+              <li class="list-group-item"><span id="day_0"></span><span id="index_0"></span></li>
+              <li class="list-group-item"><span id="day_1"></span><span id="index_1"></span></li>
+              <li class="list-group-item"><span id="day_2"></span><span id="index_2"></span></li>
+              <li class="list-group-item"><span id="day_3"></span><span id="index_3"></span></li>
+              <li class="list-group-item"><span id="day_4"></span><span id="index_4"></span></li>
             </ul>
           </div>
         </ul>
