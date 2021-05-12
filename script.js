@@ -92,7 +92,7 @@ const getTemperature = async () => {
         document.getElementById("input").value
       }&appid=ba01b37bddc3f18f7f259c51e1c01e01&units=metric`
     )
-    .catch(() => {
+    .catch((error) => {
       displayElement("none");
     });
   const current_temp = document.getElementById("current_temp"); // Current temperature
